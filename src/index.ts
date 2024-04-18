@@ -10,7 +10,7 @@ const port = 4000;
 
 async function startConsumer() {
   try {
-    const connection = await connect(process.env.CLOUDAMQP_URL || "");
+    const connection = await connect(process.env.CLOUDAMQP_URL || "amqps://ijyzhlic:FSafBk3XsXUOm12yQN_puZzM73YVgtKr@crow.rmq.cloudamqp.com/ijyzhlic");
     const channel = await connection.createChannel();
     const queue = "initial";
 
@@ -20,7 +20,7 @@ async function startConsumer() {
         const amount = parseInt(payment.amount); 
         console.log("Orden recibida, pago de: $", amount);
         try {
-          await axios.post(process.env.PAYMENT_URL || "", {
+          await axios.post(process.env.PAYMENT_URL || "https://ed-payment.onrender.com", {
             total: amount,
           });
           console.log("Pago enviado al servicio de pagos");
