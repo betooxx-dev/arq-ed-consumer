@@ -20,7 +20,7 @@ async function startConsumer() {
         const amount = parseInt(payment.amount); 
         console.log("Orden recibida, pago de: $", amount);
         try {
-          await axios.post(process.env.PAYMENT_URL || "https://ed-payment.onrender.com", {
+          await axios.post(process.env.PAYMENT_URL || "https://ed-payment.onrender.com/payment", {
             total: amount,
           });
           console.log("Pago enviado al servicio de pagos");
